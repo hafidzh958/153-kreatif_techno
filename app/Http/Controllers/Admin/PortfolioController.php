@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
+use App\Http\Requests\StorePortfolioRequest;
+use App\Http\Requests\UpdatePortfolioRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -31,27 +33,15 @@ class PortfolioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePortfolioRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'category' => ['nullable', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'],
-        ]);
-
-        $data = [
-            'title' => $validated['title'],
-            'category' => $validated['category'] ?? '',
-            'description' => $validated['description'] ?? '',
-        ];
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('portfolios', 'public');
-            $data['image_path'] = $path;
+            $validated['image'] = $request->file('image')->store('portfolios', 'public');
         }
 
-        Portfolio::create($data);
+        Portfolio::create($validated);
 
         return redirect()
             ->route('admin.portfolio.index')
@@ -77,32 +67,18 @@ class PortfolioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Portfolio $portfolio)
+    public function update(UpdatePortfolioRequest $request, Portfolio $portfolio)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'category' => ['nullable', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'],
-        ]);
-
-        $data = [
-            'title' => $validated['title'],
-            'category' => $validated['category'] ?? '',
-            'description' => $validated['description'] ?? '',
-        ];
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($portfolio->image_path) {
-                Storage::disk('public')->delete($portfolio->image_path);
+            if ($portfolio->image) {
+                Storage::disk('public')->delete($portfolio->image);
             }
-
-            $path = $request->file('image')->store('portfolios', 'public');
-            $data['image_path'] = $path;
+            $validated['image'] = $request->file('image')->store('portfolios', 'public');
         }
 
-        $portfolio->update($data);
+        $portfolio->update($validated);
 
         return redirect()
             ->route('admin.portfolio.index')
@@ -114,8 +90,8 @@ class PortfolioController extends Controller
      */
     public function destroy(Portfolio $portfolio)
     {
-        if ($portfolio->image_path) {
-            Storage::disk('public')->delete($portfolio->image_path);
+        if ($portfolio->image) {
+            Storage::disk('public')->delete($portfolio->image);
         }
 
         $portfolio->delete();

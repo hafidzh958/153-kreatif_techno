@@ -8,10 +8,12 @@
     <title>@yield('title', config('app.name', '153 Kreatif'))</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
+        @verbatim
         html {
             scroll-behavior: smooth;
         }
@@ -34,7 +36,7 @@
         .animate-fade-in-up.delay-1 { animation-delay: 0.1s; }
         .animate-fade-in-up.delay-2 { animation-delay: 0.2s; }
         .animate-fade-in-up.delay-3 { animation-delay: 0.3s; }
-        
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
@@ -124,6 +126,7 @@
             visibility: visible;
             transform: translateY(-50%) translateX(0);
         }
+        @endverbatim
     </style>
 
     @stack('styles')

@@ -9,3 +9,122 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* ─── Service Card ──────────────────────────────────────── */
+.service-card {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    padding: 30px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.service-card:hover {
+    background: #ff6b00;
+    color: #ffffff !important;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(255, 107, 0, 0.25);
+}
+
+.service-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.6rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.65;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover h4,
+.service-card:hover p {
+    color: #ffffff !important;
+}
+
+.service-icon {
+    width: 55px;
+    height: 55px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: none;
+}
+
+.service-icon i {
+    font-size: 22px;
+    color: #ff6b00;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover .service-icon i {
+    color: #ffffff;
+}
+
+/* ─── Project Card ──────────────────────────────────────── */
+.project-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-overlay h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    transform: translateY(8px);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-overlay h3 {
+    transform: translateY(0);
+}
+

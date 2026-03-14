@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Portfolio extends Model
 {
     // Tambahkan ini agar bisa menerima input data
-    protected $fillable = ['title', 'category', 'description', 'image_path'];
+    protected $fillable = ['title', 'description', 'image', 'client', 'event_date'];
 }

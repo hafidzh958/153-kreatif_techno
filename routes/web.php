@@ -9,6 +9,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PortfolioController as AdminPortfolioController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\MissionController as AdminMissionController;
+use App\Http\Controllers\Admin\ProcessController as AdminProcessController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
 Route::get('/', fn () => view('user.intro'));
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -21,9 +25,25 @@ Route::view('/about', 'user.about')->name('about');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('home', [AdminHomeController::class, 'index'])->name('home.index');
+    Route::put('home', [AdminHomeController::class, 'update'])->name('home.update');
+    
+    // Home Services CRUD
+    Route::post('home/services', [AdminHomeController::class, 'storeService'])->name('home.services.store');
+    Route::put('home/services/{id}', [AdminHomeController::class, 'updateService'])->name('home.services.update');
+    Route::delete('home/services/{id}', [AdminHomeController::class, 'deleteService'])->name('home.services.destroy');
+    Route::post('home/services/reorder', [AdminHomeController::class, 'reorderService'])->name('home.services.reorder');
+
+    // Home Projects CRUD
+    Route::post('home/projects', [AdminHomeController::class, 'storeProject'])->name('home.projects.store');
+    Route::put('home/projects/{id}', [AdminHomeController::class, 'updateProject'])->name('home.projects.update');
+    Route::delete('home/projects/{id}', [AdminHomeController::class, 'deleteProject'])->name('home.projects.destroy');
+    Route::post('home/projects/reorder', [AdminHomeController::class, 'reorderProject'])->name('home.projects.reorder');
+
     Route::resource('portfolio', AdminPortfolioController::class);
     Route::resource('services', AdminServiceController::class);
-
-    // Halaman daftar pesan contact (sementara masih placeholder)
-    Route::get('contact', [AdminContactController::class, 'index'])->name('contact.index');
+    Route::resource('missions', AdminMissionController::class);
+    Route::resource('processes', AdminProcessController::class);
+    Route::resource('contact', AdminContactController::class)->only(['index', 'destroy']);
+    Route::resource('settings', AdminSettingController::class)->only(['index', 'update']);
 });

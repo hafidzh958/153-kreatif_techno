@@ -10,15 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('services', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');         // Contoh: "Event Production"
-        $table->text('description');    // Penjelasan detail layanan
-        $table->string('icon')->nullable(); // Untuk menyimpan nama icon (misal: "bi bi-calendar")
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('services', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('icon')->nullable();
+            $table->string('image')->nullable();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

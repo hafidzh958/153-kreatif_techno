@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.app')
 
 @section('title', 'Contact Messages')
 @section('page-title', 'Pesan Contact')

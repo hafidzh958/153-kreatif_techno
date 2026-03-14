@@ -4,15 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
     /**
-     * Tampilkan daftar pesan contact (saat ini masih statis).
+     * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('admin.contact.index');
+        $contacts = Contact::latest('created_at')->paginate(10);
+
+        return view('admin.contact.index', compact('contacts'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Contact $contact)
+    {
+        $contact->delete();
+
+        return redirect()
+            ->route('admin.contact.index')
+            ->with('success', 'Pesan pelanggan berhasil dihapus.');
     }
 }
 

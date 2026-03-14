@@ -18,7 +18,7 @@
     <div id="sidebar-backdrop" class="fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none md:hidden transition-opacity" aria-hidden="true"></div>
 
     <div class="flex min-h-screen">
-        @include('components.sidebar')
+        @include('admin.components.sidebar')
 
         <div class="flex-1 flex flex-col min-w-0 w-full">
             <header class="flex-shrink-0 border-b border-gray-200 bg-white px-4 sm:px-6 py-3 sm:py-4">

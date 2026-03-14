@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>153 Kreatif</title>
     <style>
+        @verbatim
         * {
             margin: 0;
             padding: 0;
@@ -49,6 +50,7 @@
                 transform: scale(0.95);
             }
         }
+        @endverbatim
     </style>
 </head>
 <body>

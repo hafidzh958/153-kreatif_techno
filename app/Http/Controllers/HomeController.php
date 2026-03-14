@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomeSetting;
 use App\Models\Portfolio;
 use App\Models\Service;
-use App\Models\Testimonial; // Jangan lupa panggil modelnya
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     public function index(): View
     {
-        // Mengambil semua data dari database
-        $portfolios = Portfolio::all();
-        $services = Service::all();
-        $testimonials = Testimonial::all();
+        $home = HomeSetting::first();
+        $services = \App\Models\HomeService::latest()->take(6)->get();
+        $projects = \App\Models\HomeProject::latest()->take(6)->get();
 
-        // Mengirim data ke view 'user.home'
-        return view('user.home', compact('portfolios', 'services', 'testimonials'));
+        return view('user.home', compact('home', 'services', 'projects'));
     }
 }

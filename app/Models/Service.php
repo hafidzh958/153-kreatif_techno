@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    // Menambahkan kolom yang boleh diisi (mass assignable)
-    protected $fillable = ['name', 'description', 'icon'];
+    protected $fillable = ['title', 'description', 'icon', 'image'];
 }
