@@ -15,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // ... (User dummy kalau dibutuhkan)
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // ── Admin User (WAJIB ada untuk login) ──
+        \App\Models\User::updateOrCreate(
+            ['email' => env('ADMIN_EMAIL', 'admin@153kreatif.com')],
+            [
+                'name'     => 'Admin 153 Kreatif',
+                'password' => \Illuminate\Support\Facades\Hash::make(
+                    env('ADMIN_PASSWORD', 'admin153!')
+                ),
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Bikin 3 Main Services (is_main = true)
         $main1 = \App\Models\Service::create([
