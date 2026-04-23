@@ -20,7 +20,7 @@ nixPkgs = [
 dependsOn = ["setup"]
 cmds = [
     "composer install --no-dev --optimize-autoloader --no-interaction",
-    "npm ci"
+    "npm ci --include=dev"
 ]
 
 [phases.build]
