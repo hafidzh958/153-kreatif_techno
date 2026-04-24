@@ -323,7 +323,10 @@ async function handleLogin(e) {
     try {
         const res = await fetch('{{ route("admin.login.submit") }}', {
             method: 'POST',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            headers: { 
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
             body: fd
         });
 
