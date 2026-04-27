@@ -30,18 +30,6 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Models\AboutSetting;
 use App\Models\Mission;
 use App\Models\Process;
-Route::get('/fix-admin', function () {
-    $user = \App\Models\User::updateOrCreate(
-        ['email' => 'admin@153kreatif.com'],
-        [
-            'name' => 'Admin 153 Kreatif',
-            'password' => \Illuminate\Support\Facades\Hash::make('admin153!'),
-            'email_verified_at' => now(),
-        ]
-    );
-    
-    return "Admin user has been explicitly created/updated. Email: admin@153kreatif.com, Password: admin153!. You can now log in.";
-});
 
 Route::get('/', fn() => view('user.intro'));
 Route::get('/home', [HomeController::class, 'index'])->name('home');
